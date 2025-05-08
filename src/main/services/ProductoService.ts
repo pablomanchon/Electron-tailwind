@@ -1,5 +1,6 @@
 import { AppDataSource } from "../database/data-source";
 import { Producto } from "../database/entities/Producto";
+import { ProductoDTO } from "../dtos/ProductoDTO";
 
 export class ProductoService {
   static async obtenerTodos(): Promise<Producto[]> {
@@ -7,9 +8,9 @@ export class ProductoService {
     return await productoRepo.find();
   }
 
-  static async crearProducto(data: any): Promise<Producto> {
+  static async crearProducto(data: ProductoDTO): Promise<Producto> {
     const productoRepo = AppDataSource.getRepository(Producto);
-    const producto = productoRepo.create(data);
+    const producto = productoRepo.create({ ...data, isDeleted: false });
     return await productoRepo.save(producto);
   }
 

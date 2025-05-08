@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu } from 'electron';
+import "./server"
 import * as path from 'path';
 
 let mainWindow: BrowserWindow | null;
