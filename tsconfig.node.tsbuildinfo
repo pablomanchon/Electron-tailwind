@@ -1,1 +1,1 @@
-{"root":["./main/electron.cjs.ts"],"version":"5.8.3"}
+{"root":["./src/main/electron.cjs.ts"],"errors":true,"version":"5.8.3"}
