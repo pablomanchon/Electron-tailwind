@@ -27,8 +27,13 @@
 //}
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "lib": [
+      "ES2023"
+    ],
     "module": "CommonJS",
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -37,6 +42,7 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/main/**/*.ts"]
+  "include": [
+    "src/main/**/*.ts"
+  ]
 }
-
