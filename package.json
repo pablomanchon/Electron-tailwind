@@ -3,11 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "commonjs",
-  "main": "dist/electron.cjs.js",
+  "main": "dist/main/electron.cjs.js",
   "scripts": {
     "dev": "vite",
-    "electron": "npm run electron:build && electron ./dist/electron.cjs.js",
+    "electron": "npm run electron:build && electron ./dist/main/electron.cjs.js",
     "electron:build": "tsc -b tsconfig.node.json",
+    "electron:build-exe": "electron-builder",
     "build": "vite build",
     "start": "concurrently \"npm run dev\" \"npm run electron\"",
     "lint": "eslint .",
@@ -36,6 +37,7 @@
     "autoprefixer": "10.4.16",
     "concurrently": "8.2.2",
     "electron": "28.2.3",
+    "electron-builder": "^26.0.12",
     "eslint": "8.57.0",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-react-refresh": "0.3.4",
@@ -46,5 +48,22 @@
     "typescript": "5.2.2",
     "vite": "5.2.8",
     "wait-on": "7.0.1"
+  },
+  "build": {
+    "appId": "com.tuempresa.tuapp",
+    "productName": "NombreDeTuApp",
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/",
+      "dist/main/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    }
   }
 }

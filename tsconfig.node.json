@@ -10,7 +10,7 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "outDir": "./dist",
+    "outDir": "./dist/main",
     "rootDir": "./src/main",
     "skipLibCheck": true
   },
