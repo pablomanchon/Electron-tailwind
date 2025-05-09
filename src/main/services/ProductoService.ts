@@ -8,6 +8,11 @@ export class ProductoService {
     return await productoRepo.find();
   }
 
+  static async obtenerPorId(id:number) {
+    const productoRepo = AppDataSource.getRepository(Producto);
+    return await productoRepo.findBy({id});
+  }
+
   static async crearProducto(data: ProductoDTO): Promise<Producto> {
     const productoRepo = AppDataSource.getRepository(Producto);
     const producto = productoRepo.create({ ...data, isDeleted: false });

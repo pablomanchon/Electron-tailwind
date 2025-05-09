@@ -3,14 +3,14 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Producto {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  nombre: string;
+  nombre!: string;
 
   @Column('float')
-  precio: number;
+  precio!: number;
 
   @Column('boolean', { default: false })  // Establecer 'false' como valor predeterminado
-  isDeleted: boolean;
+  isDeleted!: boolean;
 }

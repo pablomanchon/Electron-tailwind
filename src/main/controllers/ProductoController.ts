@@ -11,6 +11,16 @@ export class ProductoController {
     }
   }
 
+  static async obtenerProductoPorId(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const producto = await ProductoService.obtenerPorId(parseInt(id));
+      return res.status(200).json(producto);
+    } catch (error) {
+      return res.status(500).json({ error: 'Error al obtener el producto' });
+    }
+  }
+
   static async crearProducto(req: Request, res: Response): Promise<Response> {
     try {
       const producto = await ProductoService.crearProducto(req.body);
