@@ -15,8 +15,7 @@ function createWindow() {
   });
 
   // Cargar la aplicación de React en Electron
-  mainWindow.loadFile(path.join(__dirname, '../index.html')); // Puerto de desarrollo de Vite
-
+  mainWindow.loadURL("http://localhost:5173")
   // Quitar el menú predeterminado
   Menu.setApplicationMenu(null);  // Desactiva el menú
 
