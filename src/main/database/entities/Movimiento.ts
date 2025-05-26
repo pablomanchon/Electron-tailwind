@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { MetodoPago } from "./MetodoPago";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Usuario } from "./Usuario";
+import { MovimientoMetodoPago } from "./MovimientoMetodoPago";
 import { Categoria } from "./Categoria";
 
 @Entity()
@@ -7,21 +8,30 @@ export class Movimiento {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  tipo: 'entrada' | 'salida';
+  @ManyToOne(() => Usuario, (usuario) => usuario.movimientos)
+  usuario: Usuario;
 
-  @Column('decimal', { precision: 10, scale: 2 })
-  monto: number;
-
-  @Column({ type: 'text', nullable: true })
-  descripcion?: string;
-
-  @Column()
+  @CreateDateColumn()
   fecha: Date;
 
-  @ManyToOne(() => MetodoPago, metodo => metodo.movimientos)
-  metodoPago: MetodoPago;
+  @Column()
+  tipo: string;
 
-  @ManyToOne(() => Categoria, categoria => categoria.movimientos, { nullable: true })
+  @Column("decimal", { precision: 12, scale: 2 })
+  monto: number;
+
+  @OneToMany(() => MovimientoMetodoPago, (mmp) => mmp.movimiento, {
+    cascade: true,
+    eager: true,
+  })
+  metodosPago: MovimientoMetodoPago[];
+
+  @Column({ nullable: true })
+  descripcion?: string;
+
+  @ManyToOne(() => Categoria, { nullable: true })
   categoria?: Categoria;
+
+  @Column({ default: false })
+  isDeleted: boolean;
 }

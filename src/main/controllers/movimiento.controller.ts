@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { MovimientoService } from '../services/movimiento.service';
-import { CreateMovimientoDto } from '../dtos/create-movimiento.dto.ts';
-import { UpdateMovimientoDto } from '../dtos/update-movimiento.dto';
+import { CreateMovimientoDto, UpdateMovimientoDto } from '../dtos/movimiento.dto';
 
 export class MovimientoController {
   private servicio = new MovimientoService();

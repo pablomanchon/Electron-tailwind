@@ -2,8 +2,9 @@ import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { Producto } from './entities/Producto';
 import { Movimiento } from './entities/Movimiento';
-import { MetodoPago } from './entities/MetodoPago';
 import { Categoria } from './entities/Categoria';
+import { Usuario } from './entities/Usuario';
+import { MovimientoMetodoPago } from './entities/MovimientoMetodoPago';
 
 export const AppDataSource = new DataSource({
   type: 'sqlite',
@@ -13,7 +14,8 @@ export const AppDataSource = new DataSource({
   entities: [
     Producto,
     Movimiento,
-    MetodoPago,
+    Usuario,
     Categoria,
+    MovimientoMetodoPago
   ],
 });
