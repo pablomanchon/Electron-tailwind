@@ -13,6 +13,10 @@ export class UsuarioRepository {
     return this.repo.find();
   }
 
+  findByEmail(email: string) {
+    return this.repo.findOneBy({ email });
+  }
+
   findById(id: number) {
     return this.repo.findOneBy({ id });
   }

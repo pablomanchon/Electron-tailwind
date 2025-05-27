@@ -6,7 +6,7 @@ const Table = ({ encabezados, datos, onFilaSeleccionada, onDobleClickFila }) => 
   const manejarSeleccion = (index) => {
     setFilaSeleccionada(index);
     if (onFilaSeleccionada) {
-      onFilaSeleccionada(datos[index]);
+      onFilaSeleccionada(datos[index].id);
     }
   };
 
@@ -50,7 +50,7 @@ const Table = ({ encabezados, datos, onFilaSeleccionada, onDobleClickFila }) => 
   };
 
   return (
-    <table className="w-full border-collapse border bg-blue-900 border-white text-white shadow-lg shadow-black">
+    <table className="w-full border-collapse border bg-sky-900 border-white text-white shadow-lg shadow-black">
       <thead className="border-white border-2">
         <tr>
           {encabezados.map((encabezado, index) => (

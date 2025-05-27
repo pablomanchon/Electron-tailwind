@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useModal } from '../providers/ModalProvider';
 import { X } from 'lucide-react';
+import Glass from './Glass';
 
 export default function Modal() {
   const { isModalOpen, modalStack, closeModal } = useModal();
@@ -25,19 +26,22 @@ export default function Modal() {
   if (!isModalOpen || modalStack.length === 0) return null;
 
   return (
-    <div className="fixed inset-0 max-h-screen overflow-y-auto bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed p-2 inset-0 max-h-screen overflow-y-auto bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <Glass styles='min-w-96 p-2 rounded border-black border-2 bg-cyan-700 bg-opacity-30'>
+
       {modalStack.map((modalContent, index) => (
         <div
-          key={index}
-          className={`rounded-md shadow-lg max-w-lg w-full relative ${index !== modalStack.length - 1 ? 'hidden' : ''}`}
+        key={index}
+        className={`rounded-md shadow-lg max-w-lg w-full relative ${index !== modalStack.length - 1 ? 'hidden' : ''}`}
         >
           <X
-            className="absolute cursor-pointer top-2 right-2 text-xl text-white hover:text-red-600"
+            className="absolute cursor-pointer top-0 right-2 text-xl text-white hover:text-orange-600 transition-colors"
             onClick={closeModal}
-          />
+            />
           <div>{modalContent}</div>
         </div>
       ))}
+      </Glass>
     </div>
   );
 }

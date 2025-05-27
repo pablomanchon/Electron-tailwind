@@ -4,12 +4,14 @@ import {
 } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import logo from '../assets/logo.webp';
+
 
 const navItems = [
   { name: "Inicio", href: "/", icon: <Home size={20} /> },
-  { name: "Movimientos", href: "/movimientos", icon: <Activity size={20} /> },
-  { name: "Usuarios", href: "/usuarios", icon: <User size={20} /> },
-  { name: "Informes", href: "/informes", icon: <FileBarChart size={20} /> }
+  { name: "Movimientos", href: "/moves", icon: <Activity size={20} /> },
+  { name: "Usuarios", href: "/users", icon: <User size={20} /> },
+  { name: "Informes", href: "/data", icon: <FileBarChart size={20} /> }
 ]
 
 export default function Navbar() {
@@ -39,16 +41,21 @@ export default function Navbar() {
 
       {/* Navbar */}
       <nav
-        className={`bg-gray-700 text-white shadow-black shadow border-r-2 z-50
+        className={`bg-gradient-to-t from-gray-900 to-cyan-800 text-white shadow-black shadow border-r-2 z-50
+          border-cyan-700
           fixed top-0 left-0 h-full w-60 flex flex-col 
           ${isOpen ? '' : 'hidden'}
-          md:block md:relative md:min-w-52 md:hover:shadow-white md:hover:shadow-lg md:hover:transition-shadow transition-shadow`}
+          md:block md:relative md:min-w-52 md:hover:border-r-cyan-600 md:hover:shadow-cyan-500 md:hover:shadow-md md:hover:transition-shadow transition-shadow`}
       >
         {/* Encabezado móvil con logo y botón de cerrar */}
         <div className="flex items-center justify-between p-4 md:hidden">
           <button onClick={() => setIsOpen(false)} className="text-white">
             <X size={28} />
           </button>
+        </div>
+
+        <div className='p-2'>
+          <img src={logo} alt="Logo" className="m-auto animate-spin-slower p-2" />
         </div>
 
         {/* Navegación */}
@@ -58,9 +65,9 @@ export default function Navbar() {
               key={item.name}
               to={item.href}
               onClick={() => setIsOpen(false)}
-              className={`rounded p-2 transition-colors flex items-center gap-2 z-10 
+              className={`rounded p-2 transition-all flex items-center gap-2 z-10 hover:shadow-black shadow-inner shadow-black hover:shadow-inner
                 ${location.pathname === item.href
-                  ? 'bg-sky-600 font-extrabold'
+                  ? ' shadow-black bg-sky-600 font-extrabold shadow-inner'
                   : 'bg-gay-900 hover:bg-sky-600'}`}
             >
               {item.icon}
