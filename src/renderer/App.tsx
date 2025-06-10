@@ -7,6 +7,7 @@ import PageUsers from './pages/PageUsers'
 import PageData from './pages/PageData'
 import { ToastContainer } from 'react-toastify'
 import Modal from './layout/Modal'
+import PageCtasCtes from './pages/PageCtasCtes'
 
 export default function App2() {
   return (
@@ -23,6 +24,8 @@ export default function App2() {
               <PageUsers />} />
             <Route path="/data" element={
               <PageData />} />
+            <Route path="/ctas-ctes" element={
+              <PageCtasCtes />} />
           </Routes>
            <Modal />
         </Main>

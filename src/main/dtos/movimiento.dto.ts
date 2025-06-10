@@ -9,9 +9,8 @@ export interface CreateMovimientoDto {
   tipo: 'entrada' | 'salida';
   monto: number;
   descripcion?: string;
-  fecha: string;
-  categoriaId?: number;
-  usuarioId: number;
+  categoria?: string;
+  cuentaCorrienteId: number;
   metodosPago: MetodoPagoDto[];
 }
 
@@ -19,8 +18,8 @@ export interface UpdateMovimientoDto {
   tipo?: 'entrada' | 'salida';
   monto?: number;
   descripcion?: string;
-  fecha?: string;
-  categoriaId?: number;
-  usuarioId?: number;
+  categoria?: string;
+  cuentaCorrienteId?: number;
+  fecha?: Date;
   metodosPago?: MetodoPagoDto[];
 }

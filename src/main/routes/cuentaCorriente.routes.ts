@@ -1,8 +1,9 @@
+// src/routes/cuenta-corriente.routes.ts
 import { Router } from 'express';
-import { CategoriaController } from '../controllers/categoria.controller';
+import { CuentaCorrienteController } from '../controllers/cuentaCorriente.controller';
 
 const router = Router();
-const controller = new CategoriaController();
+const controller = new CuentaCorrienteController();
 
 router.post('/', controller.crear.bind(controller));
 router.get('/', controller.listar.bind(controller));

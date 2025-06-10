@@ -4,9 +4,8 @@ import { AppDataSource } from './database/data-source';
 import productoRoutes from './routes/productoRoutes';
 import cors from 'cors';
 import movimientoRoutes from './routes/movimiento.routes';
-import categoriaRoutes from './routes/categoria.routes';
 import usuarioRoutes from './routes/user.routes';
-
+import ccRoutes from './routes/cuentaCorriente.routes'
 const app = express();
 const port = 3000;
 
@@ -19,8 +18,8 @@ AppDataSource.initialize().then(() => {
 
   app.use(productoRoutes); // Registrar rutas
   app.use('/api/moves', movimientoRoutes);
-  app.use('/api/categories', categoriaRoutes);
   app.use('/api/users', usuarioRoutes)
+  app.use('/api/Ccs', ccRoutes);
   app.listen(port, () => {
     console.log(`Servidor backend escuchando en http://localhost:${port}`);
   });

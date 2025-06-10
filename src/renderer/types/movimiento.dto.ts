@@ -7,9 +7,16 @@ export interface CreateMovimientoDto {
   tipo: 'entrada' | 'salida';
   monto: number;
   descripcion?: string;
-  fecha: string;
-  categoriaId?: number;
-  usuarioId: number;
+  categoria?: string;
+  cuentaCorrienteId: number;
+  metodosPago: MetodoPagoDto[];
+}
+export interface MovimientoDto {
+  tipo: 'entrada' | 'salida';
+  monto: number;
+  descripcion?: string;
+  categoria?: string;
+  cuentaCorrienteId: number;
   metodosPago: MetodoPagoDto[];
 }
 
@@ -17,17 +24,17 @@ export interface UpdateMovimientoDto {
   tipo?: 'entrada' | 'salida';
   monto?: number;
   descripcion?: string;
-  fecha?: string;
-  categoriaId?: number;
-  usuarioId?: number;
+  categoria?: string;
+  cuentaCorrienteId?: number;
   metodosPago?: MetodoPagoDto[];
 }
+
 
 export enum MetodoPago {
   EFECTIVO = "Efectivo",
   DEBITO = "Débito",
   CREDITO = "Crédito",
-  MERCADO_PAGO = "Mercado PAgo",
+  MERCADO_PAGO = "Mercado Pago",
   DOLAR = "Dólar",
   PENDIENTE = "Pendiente",
 }

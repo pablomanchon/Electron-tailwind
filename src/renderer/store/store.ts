@@ -1,11 +1,14 @@
 // src/store/store.ts
 import { configureStore } from '@reduxjs/toolkit'
 import usuariosReducer from './usuariosSlice'
+import movesReducer from './movesSlice'
+import ccReducer from './ccSlice'
 
 export const store = configureStore({
   reducer: {
     usuarios: usuariosReducer,
-    // otros reducers...
+    moves: movesReducer,
+    cuentasCorrientes: ccReducer
   },
 })
 

@@ -1,3 +1,4 @@
+import { CuentaCorriente } from "../database/entities/CuentaCorriente";
 import { Usuario } from "../database/entities/Usuario";
 import { CreateUsuarioDto, UpdateUsuarioDto, UsuarioDto } from "../dtos/usuario.dto";
 import { UsuarioRepository } from "../repositories/usuario.repository";
@@ -8,10 +9,25 @@ export class UsuarioService {
 
     async crearUsuario(data: CreateUsuarioDto): Promise<Usuario> {
         const usuario = new Usuario();
-        verifyUser(data as UsuarioDto)
-        const user = await this.usuarioRepo.findByEmail(usuario.email);
 
         Object.assign(usuario, data);
+
+        verifyUser(data as UsuarioDto);
+
+        // Verificás si ya existe un usuario con ese email
+        const existingUser = await this.usuarioRepo.findByEmail(usuario.email);
+        if (existingUser) {
+            throw new Error("Ya existe un usuario con ese email");
+        }
+
+        // Crear cuenta corriente vinculada
+        const cuentaCorriente = new CuentaCorriente();
+        cuentaCorriente.saldo = 0;
+
+        // Relación bidireccional
+        usuario.cuentaCorriente = cuentaCorriente;
+
+        // Guardar usuario con su cuenta corriente
         return this.usuarioRepo.save(usuario);
     }
 

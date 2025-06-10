@@ -10,6 +10,7 @@ export class CreateUsuarioDto {
 export class UpdateUsuarioDto {
   nombre?: string;
   tipo?: string;
+  cuentaCorrienteId?: number;
   telefono?: string;
   email?: string;
 }
@@ -18,6 +19,7 @@ export class UsuarioDto {
   id!: number;
   nombre!: string;
   tipo?: string;
+  cuentaCorrienteId?: number;
   telefono?: string;
   email?: string;
 }

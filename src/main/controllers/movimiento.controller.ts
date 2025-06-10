@@ -1,9 +1,21 @@
 import { Request, Response } from 'express';
 import { MovimientoService } from '../services/movimiento.service';
 import { CreateMovimientoDto, UpdateMovimientoDto } from '../dtos/movimiento.dto';
+import { AppDataSource } from '../database/data-source';
+import { Movimiento } from '../database/entities/Movimiento';
+import { MovimientoMetodoPago } from '../database/entities/MovimientoMetodoPago';
+import { CuentaCorriente } from '../database/entities/CuentaCorriente';
 
 export class MovimientoController {
-  private servicio = new MovimientoService();
+  private servicio: MovimientoService;
+
+  constructor() {
+    this.servicio = new MovimientoService(
+      AppDataSource.getRepository(Movimiento),
+      AppDataSource.getRepository(MovimientoMetodoPago),
+      AppDataSource.getRepository(CuentaCorriente)
+    );
+  }
 
   async crear(req: Request, res: Response): Promise<Response> {
     try {

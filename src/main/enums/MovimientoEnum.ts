@@ -1,5 +1,5 @@
 export enum TipoMovimiento {
-  ENTRADA = "ENTRADA",
+  INGRESO = "INGRESO",
   SALIDA = "SALIDA",
 }
 

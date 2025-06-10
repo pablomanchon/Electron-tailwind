@@ -1,4 +1,3 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
 import * as api from '../db/dbUsers'
 import {
   setLoading,

@@ -7,6 +7,7 @@ export class ProductoController {
       const productos = await ProductoService.obtenerTodos();
       return res.json(productos);
     } catch (error) {
+      console.log(error)
       return res.status(500).json({ error: 'Error al obtener productos' });
     }
   }

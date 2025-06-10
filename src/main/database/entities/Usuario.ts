@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn } from "typeorm";
 import { Movimiento } from "./Movimiento";
+import { CuentaCorriente } from "./CuentaCorriente";
 
 @Entity()
 export class Usuario {
@@ -15,9 +16,11 @@ export class Usuario {
   @Column({ nullable: true })
   telefono?: string;
 
+  @OneToOne(() => CuentaCorriente, { cascade: true })
+  @JoinColumn()
+  cuentaCorriente: CuentaCorriente;
+
   @Column({ nullable: true })
   email?: string;
 
-  @OneToMany(() => Movimiento, (movimiento) => movimiento.usuario)
-  movimientos: Movimiento[];
 }

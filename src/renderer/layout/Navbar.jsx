@@ -11,6 +11,7 @@ const navItems = [
   { name: "Inicio", href: "/", icon: <Home size={20} /> },
   { name: "Movimientos", href: "/moves", icon: <Activity size={20} /> },
   { name: "Usuarios", href: "/users", icon: <User size={20} /> },
+  { name: "Cuentas corrientes", href: "/ctas-ctes", icon: <FileBarChart size={20} /> },
   { name: "Informes", href: "/data", icon: <FileBarChart size={20} /> }
 ]
 

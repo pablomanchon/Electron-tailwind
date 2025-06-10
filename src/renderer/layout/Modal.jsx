@@ -27,7 +27,7 @@ export default function Modal() {
 
   return (
     <div className="fixed p-2 inset-0 max-h-screen overflow-y-auto bg-black bg-opacity-50 z-50 flex items-center justify-center">
-      <Glass styles='min-w-96 p-2 rounded border-black border-2 bg-cyan-700 bg-opacity-30'>
+      <Glass styles='min-w-96 p-2 rounded border-black border-2 bg-cyan-800 bg-opacity-30'>
 
       {modalStack.map((modalContent, index) => (
         <div

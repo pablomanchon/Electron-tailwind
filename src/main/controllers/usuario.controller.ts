@@ -9,8 +9,10 @@ export class UsuarioController {
     try {
       const data: CreateUsuarioDto = req.body;
       const usuario = await this.usuarioService.crearUsuario(data);
+    
       res.status(201).json(usuario);
     } catch (error: any) {
+      console.log(error)
       res.status(400).json({ message: error.message });
     }
   }

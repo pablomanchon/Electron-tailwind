@@ -1,4 +1,4 @@
-import PanelHome from "../components/Home/PanelHome";
+import PanelHome from "../components/home/PanelHome";
 
 export default function PageHome() {
   return (
