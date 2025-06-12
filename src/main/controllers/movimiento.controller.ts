@@ -3,8 +3,8 @@ import { MovimientoService } from '../services/movimiento.service';
 import { CreateMovimientoDto, UpdateMovimientoDto } from '../dtos/movimiento.dto';
 import { AppDataSource } from '../database/data-source';
 import { Movimiento } from '../database/entities/Movimiento';
-import { MovimientoMetodoPago } from '../database/entities/MovimientoMetodoPago';
 import { CuentaCorriente } from '../database/entities/CuentaCorriente';
+import { MovimientoMetodoPago } from '../database/entities/MovimientoMetodoPago';
 
 export class MovimientoController {
   private servicio: MovimientoService;
@@ -12,8 +12,8 @@ export class MovimientoController {
   constructor() {
     this.servicio = new MovimientoService(
       AppDataSource.getRepository(Movimiento),
+      AppDataSource.getRepository(CuentaCorriente),
       AppDataSource.getRepository(MovimientoMetodoPago),
-      AppDataSource.getRepository(CuentaCorriente)
     );
   }
 

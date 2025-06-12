@@ -4,9 +4,13 @@ import { useModal } from "../../../providers/ModalProvider";
 import Confirmation from "../../../layout/Confirmation";
 
 export default function BtnDeleteCc({ id }: { id: number | undefined }) {
- /*  const { deleteMovimiento } = useCc();
+  /*   const { deleteMovimiento } = useCc(); */
   const { openModal } = useModal();
 
+  const deleteMovimiento = (id: number) => {
+    console.log(id)
+  }
+  
   const handleDeleteUser = () => {
     if (!id) {
       toast.error("Selecciona un usuario");
@@ -17,5 +21,5 @@ export default function BtnDeleteCc({ id }: { id: number | undefined }) {
 
   return (
     <DangerBtn functionClick={handleDeleteUser} title={"Eliminar Usuario"} />
-  ) */
+  )
 }

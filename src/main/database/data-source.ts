@@ -4,6 +4,7 @@ import { Producto } from './entities/Producto';
 import { Movimiento } from './entities/Movimiento';
 import { Usuario } from './entities/Usuario';
 import { CuentaCorriente } from './entities/CuentaCorriente';
+import { MovimientoMetodoPago } from './entities/MovimientoMetodoPago';
 
 export const AppDataSource = new DataSource({
   type: 'sqlite',
@@ -14,6 +15,7 @@ export const AppDataSource = new DataSource({
     Producto,
     Movimiento,
     Usuario,
-    CuentaCorriente
+    CuentaCorriente,
+    MovimientoMetodoPago
   ],
 });

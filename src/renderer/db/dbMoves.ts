@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { CreateMovimientoDto, MovimientoDto, UpdateMovimientoDto } from '../types/movimiento.dto';
+import type { CreateMovimientoDto, UpdateMovimientoDto } from '../types/movimiento.dto';
 
 const API_URL = 'http://localhost:3000/api/moves';
 
@@ -14,6 +14,7 @@ export const getMovimientoById = async (id: number) => {
 };
 
 export const createMovimiento = async (data: CreateMovimientoDto) => {
+  console.log(data)
   const res = await axios.post(`${API_URL}`, data);
   return res.data;
 };

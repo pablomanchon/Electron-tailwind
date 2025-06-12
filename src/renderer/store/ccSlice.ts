@@ -30,23 +30,27 @@ const cuentaCorrienteSlice = createSlice({
     addCuenta(state, action: PayloadAction<CuentaCorrienteDto>) {
       state.cuentas.push(action.payload)
     },
-    updateCuenta(state, action: PayloadAction<CuentaCorrienteDto>) {
+    updateCuentaInState(state, action: PayloadAction<CuentaCorrienteDto>) {
       const index = state.cuentas.findIndex(c => c.id === action.payload.id)
-      if (index !== -1) state.cuentas[index] = action.payload
+      if (index !== -1) {
+        state.cuentas[index] = action.payload
+      }
     },
     removeCuenta(state, action: PayloadAction<number>) {
       state.cuentas = state.cuentas.filter(c => c.id !== action.payload)
-    },
+    }
   },
 })
+
 
 export const {
   setLoading,
   setError,
   setCuentas,
   addCuenta,
-  updateCuenta,
+  updateCuentaInState,
   removeCuenta,
 } = cuentaCorrienteSlice.actions
+
 
 export default cuentaCorrienteSlice.reducer

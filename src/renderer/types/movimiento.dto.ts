@@ -4,6 +4,7 @@ export interface MetodoPagoDto {
 }
 
 export interface CreateMovimientoDto {
+  id: number;
   tipo: 'entrada' | 'salida';
   monto: number;
   descripcion?: string;
@@ -12,6 +13,7 @@ export interface CreateMovimientoDto {
   metodosPago: MetodoPagoDto[];
 }
 export interface MovimientoDto {
+  id: number;
   tipo: 'entrada' | 'salida';
   monto: number;
   descripcion?: string;

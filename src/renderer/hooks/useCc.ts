@@ -1,7 +1,13 @@
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { crearCuenta, editarCuenta, eliminarCuenta, fetchCuentas } from '../store/ccThunks'
+import {
+  createCuenta,
+  updateCuenta,
+  deleteCuenta,
+  fetchCuentas
+} from '../store/ccThunks'
+
 import type { CreateCuentaCorrienteDto, UpdateCuentaCorrienteDto } from '../types/cta.cte.dto'
 
 
@@ -19,7 +25,7 @@ export function useCuentasCorrientes() {
 
   const addCuentaCorriente = async (data: CreateCuentaCorrienteDto) => {
     try {
-      await dispatch(crearCuenta(data))
+      await dispatch(createCuenta(data))
       toast.success('Cuenta corriente creada correctamente')
       refresh()
     } catch (error: any) {
@@ -29,7 +35,7 @@ export function useCuentasCorrientes() {
 
   const editCuentaCorriente = async (id: number, data: UpdateCuentaCorrienteDto) => {
     try {
-      await dispatch(editarCuenta(id, data))
+      await dispatch(updateCuenta(id, data))
       toast.success('Cuenta corriente actualizada correctamente')
       refresh()
     } catch (error: any) {
@@ -39,7 +45,7 @@ export function useCuentasCorrientes() {
 
   const deleteCuentaCorriente = async (id: number) => {
     try {
-      await dispatch(eliminarCuenta(id))
+      await dispatch(deleteCuenta(id))
       toast.success('Cuenta corriente eliminada correctamente')
       refresh()
     } catch (error: any) {

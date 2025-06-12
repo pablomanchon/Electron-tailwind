@@ -1,14 +1,14 @@
 import { useEffect } from "react"
 import DynamicForm from "../../../layout/DynamicForm"
 import Title from "../../../layout/Title"
-import { useCc } from "../../../hooks/useCc"
+import { useCuentasCorrientes } from "../../../hooks/useCc"
 
 interface Props {
   id: number
 }
 
 export default function FormMovimientoEdit({ id }: Props) {
-  /* const { getById, editMovimiento, refresh } = use()
+  /* const { getById, editMovimiento, refresh } = useCuentasCorrientes()
 
   const movimiento = getById(id)
 

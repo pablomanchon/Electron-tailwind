@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PrimaryButton from '../components/PrimaryButton'
 
 interface InputDefBase {
@@ -6,6 +6,7 @@ interface InputDefBase {
     label?: string
     required?: boolean
     value?: any
+    hidden?: boolean
 }
 
 type InputDef =
@@ -32,10 +33,15 @@ interface DynamicFormProps {
 export default function DynamicForm({ inputs, onSubmit, typeBtn = 'primary', titleBtn = 'Button' }: DynamicFormProps) {
     const [formValues, setFormValues] = useState(() =>
         inputs.reduce((acc, input) => {
-            acc[input.name] = input.value ?? (input.type === 'checkbox' ? false : undefined)
+            acc[input.name] = input.value ?? (input.type === 'checkbox' ? false : '')
             return acc
         }, {} as Record<string, any>)
     )
+
+    useEffect(() => {
+        console.log('formValues', formValues)
+    }, [formValues])
+
 
     const handleChange = (name: string, value: any) => {
         setFormValues(prev => ({ ...prev, [name]: value }))
@@ -49,7 +55,7 @@ export default function DynamicForm({ inputs, onSubmit, typeBtn = 'primary', tit
     return (
         <form onSubmit={handleSubmit} className="space-y-4 flex flex-col py-2">
             {inputs.map(input => (
-                <div key={input.name} className="flex flex-col text-black">
+                <div key={input.name} className={`flex flex-col text-black ${input.hidden && 'hidden'}`}>
                     {input.label && <label className="text-sm font-semibold mb-1 text-white">{input.label}</label>}
                     {
                         input.type === 'component' ? (
@@ -62,7 +68,7 @@ export default function DynamicForm({ inputs, onSubmit, typeBtn = 'primary', tit
                                 required={input.required}
                                 value={formValues[input.name]}
                                 onChange={e => handleChange(input.name, e.target.value)}
-                                className="border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black"
+                                className={`border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black`}
                             >
                                 {input.options?.map(opt => (
                                     <option key={opt.value} value={opt.value}>
@@ -83,7 +89,8 @@ export default function DynamicForm({ inputs, onSubmit, typeBtn = 'primary', tit
                                 required={input.required}
                                 value={formValues[input.name]}
                                 onChange={e => handleChange(input.name, e.target.value)}
-                                className="border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black min-h-[100px]"
+                                className=
+                                {"border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black min-h-[100px]"}
                             />
                         ) : (
                             <input
@@ -91,7 +98,8 @@ export default function DynamicForm({ inputs, onSubmit, typeBtn = 'primary', tit
                                 type={input.type}
                                 value={formValues[input.name]}
                                 onChange={e => handleChange(input.name, e.target.value)}
-                                className="border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black"
+                                className=
+                                {"border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black"}
                             />
                         )}
 

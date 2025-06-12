@@ -7,6 +7,7 @@ import { addMovimiento } from '../../../store/movesSlice'
 export default function FormMovimiento({ cuentaId }: { cuentaId: number }) {
   const { } = useCuentasCorrientes()
 
+  
   return (
     <div>
       <Title>Nuevo Movimiento</Title>
@@ -15,13 +16,10 @@ export default function FormMovimiento({ cuentaId }: { cuentaId: number }) {
           {
             name: 'tipo',
             label: 'Tipo',
-            type: 'select',
+            type: 'text',
             required: true,
-            options: [
-              { label: '-', value: '' },
-              { label: 'Entrada', value: 'entrada' },
-              { label: 'Salida', value: 'salida' },
-            ],
+            value: 'entrada',
+            hidden: true
           },
           { name: 'monto', label: 'Monto', type: 'number', required: true },
           { name: 'descripcion', label: 'Descripción', type: 'text' },
