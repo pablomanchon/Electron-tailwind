@@ -5,7 +5,7 @@ import { CuentaCorrienteRepository } from '../repositories/cuentaCorriente.repos
 import { toCuentaCorrienteDto } from '../utils/toCtaCteDto'
 
 export class CuentaCorrienteService {
-  constructor(private readonly repo: CuentaCorrienteRepository) {}
+  constructor(private readonly repo: CuentaCorrienteRepository) { }
 
   async crearCuenta(cuenta: Partial<CuentaCorriente>): Promise<CuentaCorrienteDto> {
     const nueva = new CuentaCorriente()
@@ -24,6 +24,11 @@ export class CuentaCorrienteService {
   async obtenerPorId(id: number): Promise<CuentaCorrienteDto | null> {
     const cuenta = await this.repo.findById(id)
     return cuenta ? toCuentaCorrienteDto(cuenta) : null
+  }
+
+  async obtenerEntidadPorId(id: number): Promise<CuentaCorriente | null> {
+    const cuenta = await this.repo.findById(id);
+    return cuenta;
   }
 
   async actualizar(id: number, data: Partial<CuentaCorriente>): Promise<CuentaCorrienteDto> {

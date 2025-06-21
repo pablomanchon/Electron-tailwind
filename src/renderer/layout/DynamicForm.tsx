@@ -22,7 +22,6 @@ type InputDef =
         }>
     })
 
-
 interface DynamicFormProps {
     inputs: InputDef[]
     onSubmit: (formValues: Record<string, any>) => void
@@ -42,8 +41,10 @@ export default function DynamicForm({ inputs, onSubmit, typeBtn = 'primary', tit
         console.log('formValues', formValues)
     }, [formValues])
 
-
-    const handleChange = (name: string, value: any) => {
+    const handleChange = (name: string, value: any, type?: string) => {
+        if (type === 'number') {
+            value = value === '' ? '' : parseFloat(value)
+        }
         setFormValues(prev => ({ ...prev, [name]: value }))
     }
 
@@ -61,14 +62,14 @@ export default function DynamicForm({ inputs, onSubmit, typeBtn = 'primary', tit
                         input.type === 'component' ? (
                             <input.Component
                                 value={formValues[input.name]}
-                                onChange={(val) => handleChange(input.name, val)}
+                                onChange={(val) => handleChange(input.name, val, input.type)}
                             />
                         ) : input.type === 'select' ? (
                             <select
                                 required={input.required}
                                 value={formValues[input.name]}
-                                onChange={e => handleChange(input.name, e.target.value)}
-                                className={`border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black`}
+                                onChange={e => handleChange(input.name, e.target.value, input.type)}
+                                className="border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black"
                             >
                                 {input.options?.map(opt => (
                                     <option key={opt.value} value={opt.value}>
@@ -81,33 +82,29 @@ export default function DynamicForm({ inputs, onSubmit, typeBtn = 'primary', tit
                                 required={input.required}
                                 type="checkbox"
                                 checked={formValues[input.name]}
-                                onChange={e => handleChange(input.name, e.target.checked)}
+                                onChange={e => handleChange(input.name, e.target.checked, input.type)}
                                 className="h-5 w-5 outline-none shadow-inner shadow-black border-black"
                             />
                         ) : input.type === 'textarea' ? (
                             <textarea
                                 required={input.required}
                                 value={formValues[input.name]}
-                                onChange={e => handleChange(input.name, e.target.value)}
-                                className=
-                                {"border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black min-h-[100px]"}
+                                onChange={e => handleChange(input.name, e.target.value, input.type)}
+                                className="border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black min-h-[100px]"
                             />
                         ) : (
                             <input
                                 required={input.required}
                                 type={input.type}
                                 value={formValues[input.name]}
-                                onChange={e => handleChange(input.name, e.target.value)}
-                                className=
-                                {"border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black"}
+                                onChange={e => handleChange(input.name, e.target.value, input.type)}
+                                className="border rounded px-2 py-1 outline-none shadow-inner shadow-black border-black"
                             />
                         )}
-
                 </div>
             ))}
 
-            {typeBtn === 'primary' && <PrimaryButton functionClick={null} title={titleBtn} />
-            }
+            {typeBtn === 'primary' && <PrimaryButton functionClick={null} title={titleBtn} />}
         </form>
     )
 }

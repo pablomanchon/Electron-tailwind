@@ -8,6 +8,7 @@ const CC_URL = `${BASE_URL}/ccs`
 export const findAllCuentasCorrientes = async (): Promise<CuentaCorrienteDto[]> => {
   try {
     const res = await axios.get(CC_URL)
+    console.log(res)
     return res.data
   } catch (error) {
     throw error

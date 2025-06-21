@@ -16,7 +16,10 @@ export class Usuario {
   @Column({ nullable: true })
   telefono?: string;
 
-  @OneToOne(() => CuentaCorriente, { cascade: true })
+  @OneToOne(() => CuentaCorriente, (cc) => cc.usuario, {
+    cascade: true,
+    eager: true,
+  })
   @JoinColumn()
   cuentaCorriente: CuentaCorriente;
 

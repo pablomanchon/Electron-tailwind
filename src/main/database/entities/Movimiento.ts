@@ -19,11 +19,11 @@ export class Movimiento {
   @OneToMany(() => MovimientoMetodoPago, (mp) => mp.movimiento, { cascade: true, eager: true })
   metodosPago: MovimientoMetodoPago[];
 
-
   @Column({ nullable: true })
   descripcion?: string;
 
-  categoria?: String;
+  @Column({ nullable: true })
+  categoria?: string;
 
   @ManyToOne(() => CuentaCorriente, (cuenta) => cuenta.movimientos)
   cuentaCorriente: CuentaCorriente;

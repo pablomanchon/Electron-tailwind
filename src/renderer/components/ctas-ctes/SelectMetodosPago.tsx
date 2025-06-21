@@ -5,7 +5,7 @@ import DangerBtn from "../DangerButton"
 
 interface MetodoPagoDto {
   metodo: MetodoPago
-  monto: number
+  monto: string
 }
 
 interface Props {
@@ -18,11 +18,12 @@ export default function MetodosPagoInput({ value, onChange }: Props) {
 
   const handleAdd = () => {
     setMetodos(prev => {
-      const nuevos = [...prev, { metodo: MetodoPago.EFECTIVO, monto: 0 }]
-      onChange(nuevos)
-      return nuevos
-    })
-  }
+      const nuevos = [...prev, { metodo: MetodoPago.EFECTIVO, monto: "" }];
+      onChange(nuevos);
+      return nuevos;
+    });
+  };
+
 
   const handleRemove = (index: number) => {
     const nuevos = metodos.filter((_, i) => i !== index)
@@ -53,17 +54,17 @@ export default function MetodosPagoInput({ value, onChange }: Props) {
             ))}
           </select>
           <input
-            type="number"
-            className="border px-2 py-1 rounded w-32"
-            value={mp.monto}
-            onChange={(e) => handleChange(index, "monto", e.target.value)}
-            placeholder="Monto"
-          />
-          
-          <DangerBtn functionClick={()=> handleRemove(index) } title={"Quitar"} type={"button"}/>
+  type="number"
+  className="border px-2 py-1 rounded w-32"
+  value={mp.monto}
+  onChange={(e) => handleChange(index, "monto", e.target.value)}
+  placeholder="Monto"
+/>
+
+          <DangerBtn functionClick={() => handleRemove(index)} title={"Quitar"} type={"button"} />
         </div>
       ))}
-      <PrimaryButton functionClick={handleAdd} title={"Agregar Método de Pago"}  type={"button"}/>
+      <PrimaryButton functionClick={handleAdd} title={"Agregar Método de Pago"} type={"button"} />
     </div>
   )
 }

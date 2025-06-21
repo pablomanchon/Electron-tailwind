@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-const Table = ({ encabezados, datos, onFilaSeleccionada, onDobleClickFila }) => {
+
+const Table = ({ encabezados, datos, onFilaSeleccionada, onDobleClickFila, formatoFecha = 'fecha-hora' }) => {
   const [filaSeleccionada, setFilaSeleccionada] = useState(null);
 
   const manejarSeleccion = (index) => {
@@ -19,53 +20,45 @@ const Table = ({ encabezados, datos, onFilaSeleccionada, onDobleClickFila }) => 
   const formatearFecha = (valor) => {
     const fecha = new Date(valor);
     if (isNaN(fecha.getTime())) return valor;
-    return fecha.toLocaleString("es-AR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    });
+
+    const opciones = {
+      ...(formatoFecha.includes('fecha') && {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      }),
+      ...(formatoFecha.includes('hora') && {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    };
+
+    return fecha.toLocaleString('es-AR', opciones);
   };
 
-const obtenerValor = (fila, encabezado) => {
-  let clave = "";
-  if (typeof encabezado === "string") {
-    clave = encabezado.toLowerCase();
-  } else if (typeof encabezado === "object" && encabezado.clave) {
-    clave = encabezado.clave;
-  }
+  const obtenerValor = (fila, encabezado) => {
+    let clave = typeof encabezado === 'string'
+      ? encabezado.toLowerCase()
+      : encabezado?.clave?.toLowerCase() ?? '';
 
-  // Soporte para propiedades anidadas con "."
-  const keys = clave.split('.');
+    const keys = clave.split('.');
+    let valor = fila;
 
-  // Recorremos cada nivel para obtener el valor anidado
-  let valor = fila;
-  for (const key of keys) {
-    if (valor == null) break; // Si no existe el nivel, paramos
-    valor = valor[key];
-  }
+    for (const key of keys) {
+      if (valor == null) break;
+      valor = valor[key];
+    }
 
-  // Formateo especial para fecha
-  if (keys[keys.length - 1].toLowerCase() === "fecha") {
-    const fecha = new Date(valor);
-    if (isNaN(fecha.getTime())) return valor;
-    return fecha.toLocaleString("es-AR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-  }
+    // Formatear si es campo de fecha
+    if (keys[keys.length - 1].includes('fecha')) {
+      return formatearFecha(valor);
+    }
 
-  return valor;
-};
-
-
-  const obtenerTitulo = (encabezado) => {
-    return typeof encabezado === "string" ? encabezado : encabezado.titulo;
+    return valor;
   };
+
+  const obtenerTitulo = (encabezado) =>
+    typeof encabezado === 'string' ? encabezado : encabezado.titulo;
 
   return (
     <div className="w-full">
@@ -90,7 +83,7 @@ const obtenerValor = (fila, encabezado) => {
                 : index % 2 === 0
                   ? "bg-gray-950"
                   : "bg-gray-800"
-                }`}
+              }`}
             >
               {encabezados.map((encabezado, i) => (
                 <td key={i} className="px-2 border-x-2 text-center">
@@ -102,7 +95,6 @@ const obtenerValor = (fila, encabezado) => {
         </tbody>
       </table>
     </div>
-
   );
 };
 

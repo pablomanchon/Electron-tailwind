@@ -3,12 +3,12 @@ import {
     setLoading,
     setError,
     setMovimientos,
-    addMovimiento,
-    updateMovimiento,
-    removeMovimiento,
 } from './movesSlice'
 
 import type { CreateMovimientoDto, UpdateMovimientoDto } from '../types/movimiento.dto'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+import { fetchCuentas } from './ccThunks'
 
 export const fetchMovimientos = () => async (dispatch: any) => {
     try {
@@ -23,17 +23,37 @@ export const fetchMovimientos = () => async (dispatch: any) => {
     }
 }
 
-export const crearMovimiento = (mov: CreateMovimientoDto) => async (dispatch: any) => {
-    const data = await api.createMovimiento(mov)
-    dispatch(addMovimiento(data))
-}
+export const crearMovimiento = createAsyncThunk(
+  'movimientos/crear',
+  async (data: CreateMovimientoDto, { dispatch }) => {
+    const response = await api.createMovimiento(data);
 
-export const editarMovimiento = (id: number, data: UpdateMovimientoDto) => async (dispatch: any) => {
+    // ⚠️ Asegurate de que `response.data` incluya la cuentaId
+    const movimiento = response.data
+
+    // Opción A: volver a cargar todas las cuentas
+    dispatch(fetchCuentas())
+
+    // Opción B: si el backend devuelve el nuevo saldo, actualizar solo esa cuenta:
+    // dispatch(updateCuenta(movimiento.cuentaId, { saldo: movimiento.nuevoSaldo }))
+
+    return movimiento
+  }
+)
+
+export const editarMovimiento = createAsyncThunk(
+  'movimientos/editar',
+  async ({ id, data }: { id: number; data: UpdateMovimientoDto }) => {
     const actualizado = await api.updateMovimiento(id, data)
-    dispatch(updateMovimiento(actualizado))
-}
+    return actualizado
+  }
+)
 
-export const eliminarMovimiento = (id: number) => async (dispatch: any) => {
+export const eliminarMovimiento = createAsyncThunk(
+  'movimientos/eliminar',
+  async (id: number) => {
     await api.deleteMovimiento(id)
-    dispatch(removeMovimiento(id))
-}
+    return id
+  }
+)
+

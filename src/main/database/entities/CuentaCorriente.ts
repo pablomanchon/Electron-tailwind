@@ -18,4 +18,12 @@ export class CuentaCorriente {
 
   @Column({ default: false })
   isDeleted: boolean
+
+  constructor(usuario?: Usuario) {
+    if (usuario) {
+      this.usuario = usuario;
+    }
+    this.saldo = 0;
+    this.isDeleted = false;
+  }
 }

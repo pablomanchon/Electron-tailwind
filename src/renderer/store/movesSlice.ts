@@ -14,6 +14,8 @@ const initialState: MovimientoState = {
     error: null,
 }
 
+import { crearMovimiento, editarMovimiento, eliminarMovimiento } from './movesThunks'
+
 const movimientosSlice = createSlice({
     name: 'movimientos',
     initialState,
@@ -38,6 +40,20 @@ const movimientosSlice = createSlice({
             state.movimientos = state.movimientos.filter(m => m.id !== action.payload)
         },
     },
+    extraReducers: (builder) => {
+        builder.addCase(crearMovimiento.fulfilled, (state, action) => {
+            state.movimientos.push(action.payload)
+        }),
+            builder.addCase(editarMovimiento.fulfilled, (state, action) => {
+                const index = state.movimientos.findIndex(m => m.id === action.payload.id)
+                if (index !== -1) {
+                    state.movimientos[index] = action.payload
+                }
+            })
+        builder.addCase(eliminarMovimiento.fulfilled, (state, action) => {
+            state.movimientos = state.movimientos.filter(m => m.id !== action.payload)
+        })
+    }
 })
 
 export const {

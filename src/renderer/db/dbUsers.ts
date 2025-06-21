@@ -15,8 +15,8 @@ export const getUsuarioById = async (id: number) => {
 };
 
 export const createUsuario = async (data: CreateUsuarioDto) => {
-  console.log(data)
   const res = await axios.post(API_URL, data);
+  console.log(res);
   return res.data;
 };
 
