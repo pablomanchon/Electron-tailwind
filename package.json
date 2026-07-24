@@ -29,7 +29,7 @@
     "react-toastify": "^11.0.5",
     "reflect-metadata": "0.2.2",
     "sqlite3": "5.1.7",
-    "typeorm": "0.3.23"
+    "typeorm": "0.3.31"
   },
   "devDependencies": {
     "@eslint/js": "8.57.0",
